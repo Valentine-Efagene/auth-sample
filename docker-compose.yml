@@ -1,0 +1,36 @@
+services:
+  # app:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - redis
+  #     # - mysql
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - appNetwork
+  #   volumes:
+  #     - ./src:/usr/src/app/src # Mount local source code into container, for dev mode
+
+  # mysql:
+  #   image: mysql:latest
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "3307:3306"
+  #   networks:
+  #     - appNetwork
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: redis-server --loglevel warning
+    networks:
+      - appNetwork
+
+networks:
+  appNetwork:
+    driver: bridge
