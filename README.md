@@ -1,12 +1,11 @@
-<p align="center">
+<!-- <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+</p> -->
 
 ## Description
-
-Sample [Project](https://github.com/vishnucprasad/nest_auth/tree/main).
-
 - Database: MySQL
+- Framework: NestJS
+- Language: Typescript
 
 ## Installation
 
@@ -41,11 +40,12 @@ $ pnpm run test:cov
 ```
 
 ## References
-- [https://notiz.dev/blog/send-emails-with-nestjs](Mailer Tutorial)
+- [https://en.wikipedia.org/wiki/Role-based_access_control](Role-based access control)
 
 ## Stay in touch
 
 - Author - Valentine Efagene
 - Phone - 09034360573
+- WhatsApp - [WhatsApp](https://wa.me/23434360573)
 - Email - [efagenevalentine@gmail.com](mailto:efagenevalentine@gmail.com)
 - LinkedIn - [https://www.linkedin.com/in/valentine-efagene/](https://www.linkedin.com/in/valentine-efagene/)
