@@ -17,6 +17,13 @@ import { IAuthTokensAndUser } from './auth.type';
 export class AuthController {
     constructor(private authService: AuthService) { }
 
+    @HttpCode(HttpStatus.CREATED)
+    @Post('sign-up')
+    async signUp(@Body() dto: SignUpDto): Promise<StandardApiResponse<IAuthTokensAndUser>> {
+        const response = await this.authService.signUp(dto);
+        return new StandardApiResponse(HttpStatus.CREATED, ResponseMessage.CREATED, response)
+    }
+
     @HttpCode(HttpStatus.OK)
     @Throttle({
         default: {
@@ -30,13 +37,6 @@ export class AuthController {
     ): Promise<StandardApiResponse<IAuthTokensAndUser>> {
         const response = await this.authService.signIn(dto);
         return new StandardApiResponse(HttpStatus.OK, ResponseMessage.AUTHENTICATED, response)
-    }
-
-    @HttpCode(HttpStatus.CREATED)
-    @Post('sign-up')
-    async signUp(@Body() dto: SignUpDto): Promise<StandardApiResponse<IAuthTokensAndUser>> {
-        const response = await this.authService.signUp(dto);
-        return new StandardApiResponse(HttpStatus.CREATED, ResponseMessage.CREATED, response)
     }
 
     @SwaggerAuth()

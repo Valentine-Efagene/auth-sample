@@ -77,6 +77,7 @@ import AuthenticationMiddleware from './common/middleware/AuthenticationMiddlewa
         UserSuspension,
         PasswordResetToken
       ],
+      dropSchema: process.env.NODE_ENV === 'test',
       synchronize: process.env.DB_HOST === 'localhost',
       namingStrategy: new CustomNamingStrategy(),
     }),

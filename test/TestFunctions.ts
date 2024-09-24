@@ -37,13 +37,13 @@ export default class TestFunctions {
         await request(app.getHttpServer())
             .post('/auth/sign-up')
             .send(dto)
-            .expect(HttpStatus.CREATED)
             .expect((res) => {
                 expect(res.body).toHaveProperty('data');
                 token = res.body.data.accessToken
                 expect(res.body.message).toBe(ResponseMessage.CREATED)
                 expect(res.body.statusCode).toBe(HttpStatus.CREATED);
-            });
+            })
+            .expect(HttpStatus.CREATED)
 
         return token
     }

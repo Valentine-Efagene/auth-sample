@@ -4,15 +4,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../src/user/user.entity';
-import { CustomNamingStrategy } from '../src/common/helpers/CustomNamingStrategy';
 import TestFunctions from './TestFunctions';
 import DataEntryHelper from '../src/common/helpers/DataEntryHelper';
 import { UserService } from '../src/user/user.service';
-import { Role } from '../src/role/role.entity';
-import { Permission } from '../src/permission/permission.entity';
-import { RefreshToken } from '../src/refresh_token/refresh_token.entity';
 import { CreatePermissionDto } from '../src/permission/permission.dto';
 import { PermissionsEnum } from '../src/permission/permission.enums';
 import { AssignPermissionsDto, CreateRoleDto } from '../src/role/role.dto';
@@ -23,25 +17,16 @@ describe('AppController (e2e)', () => {
   let userService: UserService;
 
   beforeEach(async () => {
+    // Override environment variables for the test database
+    process.env.DB_HOST = 'localhost';
+    process.env.DB_PORT = '3306';
+    process.env.DB_USERNAME = 'root';
+    process.env.DB_PASSWORD = '';
+    process.env.DB_NAME = process.env.DB_NAME_TEST;
+    process.env.NODE_ENV = 'test';
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        TypeOrmModule.forRoot({
-          type: 'mysql',
-          host: process.env.DB_HOST ?? 'localhost',
-          port: Number(process.env.DB_PORT) ?? 3306,
-          username: process.env.DB_USERNAME ?? 'root',
-          password: process.env.DB_PASSWORD ?? '',
-          database: process.env.DB_NAME_TEST,
-          entities: [
-            User,
-            Role,
-            Permission,
-            RefreshToken
-          ],
-          synchronize: true,
-          namingStrategy: new CustomNamingStrategy(),
-          dropSchema: true,
-        }),
         AppModule,
       ],
     }).compile();
